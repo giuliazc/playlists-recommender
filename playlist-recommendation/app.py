@@ -75,7 +75,7 @@ def recommend_api():
     if frequent_itemsets:
         popular_songs = generate_popular_songs_from_itemsets(frequent_itemsets, top_n=10)
     else:
-        popular_songs = ["Umbrella - Rihanna", "Diamonds - Rihanna"]
+        popular_songs = ["Umbrella", "Diamonds"]
 
     recommendations = recommend_music(track_names, rules, popular_songs, top_n=5)
     if not recommendations:
