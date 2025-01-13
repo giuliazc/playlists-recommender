@@ -7,7 +7,7 @@ from flask import Flask, request, jsonify, render_template
 app = Flask(__name__)
 
 PORT_API_REST = 52025
-RULES_PATH = "../models"
+RULES_PATH = "/home/giuliacastro/project2-pv/rules"
 RULES_FILE = os.path.join(RULES_PATH, "rules.pkl")
 FREQUENT_ITEMSETS_PATH = os.path.join(RULES_PATH, "frequent_itemsets.pkl")
 
