@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: project2-pv-giuliacastro
+  namespace: giuliacastro
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 1Gi
+  storageClassName: default-storage-class-giuliacastro
+  accessModes:
+    - ReadWriteMany
+persistentVolumeReclaimPolicy: Recycle
+hostPath:
+  /home/giuliacastro/project2-pv
