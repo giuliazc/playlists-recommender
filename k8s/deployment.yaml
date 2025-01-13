@@ -32,3 +32,4 @@ spec:
       - name: project2-pv-giuliacastro
         persistentVolumeClaim:
           claimName: project2-pv-giuliacastro
+          
