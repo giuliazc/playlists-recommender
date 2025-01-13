@@ -48,9 +48,9 @@ def generate_transactions(df: pd.DataFrame) -> List[List[str]]:
     """
     transactions = []
     for pid, group in df.groupby('pid'):
-        transaction = [f"{artist}|{track}" for artist, track in zip(group['artist_name'], group['track_name'])]
+        transaction = group['track_name'].tolist()
         transactions.append(transaction)
-
+    
     return transactions
 
 

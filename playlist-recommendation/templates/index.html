@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recomendador de Músicas</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -24,11 +23,6 @@
         .container {
             margin-top: 50px;
         }
-        .option-title {
-            font-weight: bold;
-            color: #005187;
-            margin-bottom: 15px;
-        }
         .form-footer {
             display: flex;
             justify-content: flex-end;
@@ -39,57 +33,65 @@
     <div class="container">
         <div class="text-center mb-5">
             <h1 class="display-5">Recomendamos músicas para você! 🎵</h1>
-            <p class="text-muted">Envie um arquivo CSV contendo música e artista para recomendações personalizadas. Você também pode inserir manualmente as informações.</p>
-        </div>
-        
-        <div class="card shadow p-4 mb-4">
-            <h2 class="option-title">Envie um arquivo CSV</h2>
-            <form action="/upload" method="post" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="file" class="form-label">Envie um arquivo CSV separado por vírgula, com o cabeçalho <i>artist_name, track_name</i>:</label>
-                    <input type="file" name="file" id="file" class="form-control" required>
-                </div>
-                <div class="form-footer">
-                    <button type="submit" class="btn btn-custom">Enviar CSV</button>
-                </div>
-            </form>
+            <p class="text-muted">Digite uma ou mais músicas separadas por vírgulas para obter recomendações personalizadas.</p>
         </div>
 
         <div class="card shadow p-4">
-            <h2 class="option-title">Inserir informações manualmente</h2>
-            <form action="/manual" method="post">
+            <h2 class="mb-4">Insira suas músicas</h2>
+            <form id="music-form">
                 <div class="mb-3">
-                    <label for="artist" class="form-label">Nome do Artista:</label>
-                    <input type="text" name="artist" id="artist" class="form-control" placeholder="Digite o nome do artista" required>
-                </div>
-                <div class="mb-3">
-                    <label for="track" class="form-label">Nome da Música:</label>
-                    <input type="text" name="track" id="track" class="form-control" placeholder="Digite o nome da música" required>
+                    <label for="songs" class="form-label">Músicas:</label>
+                    <textarea name="songs" id="songs" class="form-control" placeholder="Digite as músicas separadas por vírgulas, ex.: Crash And Burn, It Goes Like This, Play It Again" rows="4" required></textarea>
                 </div>
                 <div class="form-footer">
-                    <button type="submit" class="btn btn-custom">Enviar Informações</button>
+                    <button type="submit" class="btn btn-custom">Obter Recomendações</button>
                 </div>
             </form>
+
+            <div id="result" class="mt-4">
+            </div>
         </div>
-        
-        {% if error %}
-            <div class="alert alert-danger mt-4">
-                {{ error }}
-            </div>
-        {% endif %}
-        
-        {% if recommendations %}
-            <div class="card shadow mt-4 p-4">
-                <h2 class="h4">Recomendações de músicas:</h2>
-                <ul class="list-group mt-3">
-                    {% for rule in recommendations %}
-                        <li class="list-group-item">{{ rule }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.getElementById('music-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const songsInput = document.getElementById('songs').value.trim();
+            const songs = songsInput.split(',').map(song => song.trim());
+            
+            if (songs.length === 0) {
+                alert("Você deve inserir pelo menos uma música para a recomendação.");
+                return;
+            }
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = "Carregando recomendações...";
+
+            try {
+                const response = await fetch('/api/recommend', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ songs }),
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <h3>Recomendações de músicas para você:</h3>
+                        <ul>
+                            ${data.recommendations.map(song => `<li>${song}</li>`).join('')}
+                        </ul>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `<p class="text-danger">${data.error}</p>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="text-danger">Não conseguimos processar sua solicitação. Tente novamente mais tarde.</p>`;
+            }
+        });
+    </script>
 </body>
 </html>
