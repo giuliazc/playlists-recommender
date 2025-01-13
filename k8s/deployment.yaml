@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: playlists-recommender-giuliacastro
-        image: public.ecr.aws/u7i7l2e7/playlists-recommender-giuliacastro:latest
+        image: public.ecr.aws/u7i7l2e7/playlists-recommender-giuliacastro:v0.1
         ports:
         - containerPort: 52025
         imagePullPolicy: IfNotPresent
@@ -24,7 +24,7 @@ spec:
         - name: project2-pv-giuliacastro
           mountPath: /home/giuliacastro/project2-pv
       - name: frequent-itemsets-giuliacastro
-        image: public.ecr.aws/u7i7l2e7/frequent-itemsets-giuliacastro:latest
+        image: public.ecr.aws/u7i7l2e7/frequent-itemsets-giuliacastro:v0.1
         volumeMounts:
         - name: project2-pv-giuliacastro
           mountPath: /home/giuliacastro/project2-pv
