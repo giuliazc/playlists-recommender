@@ -1,0 +1,11 @@
+project: giuliacastro-project
+source:
+  repoURL: https://github.com/giuliazc/playlists-recommender.git
+  path: k8s/
+  targetRevision: HEAD
+destination:
+  server: https://kubernetes.default.svc
+  namespace: giuliacastro
+syncPolicy:
+  automated:
+    selfHeal: true
