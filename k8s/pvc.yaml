@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: project2-pv-giuliacastro
+  name: project2-pv2-giuliacastro
   namespace: giuliacastro
   labels:
     type: local
@@ -14,4 +14,4 @@ spec:
     - ReadWriteMany
 persistentVolumeReclaimPolicy: Recycle
 hostPath:
-  /home/giuliacastro/project2-pv
+  /home/giuliacastro/project2-pv2

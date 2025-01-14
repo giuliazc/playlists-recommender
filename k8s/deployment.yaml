@@ -21,15 +21,15 @@ spec:
         - containerPort: 52025
         imagePullPolicy: IfNotPresent
         volumeMounts:
-        - name: project2-pv-giuliacastro
-          mountPath: /home/giuliacastro/project2-pv
+        - name: project2-pv2-giuliacastro
+          mountPath: /home/giuliacastro/project2-pv2
       - name: frequent-itemsets-giuliacastro
         image: public.ecr.aws/u7i7l2e7/frequent-itemsets-giuliacastro:v0.1
         volumeMounts:
-        - name: project2-pv-giuliacastro
-          mountPath: /home/giuliacastro/project2-pv
+        - name: project2-pv2-giuliacastro
+          mountPath: /home/giuliacastro/project2-pv2
       volumes:
-      - name: project2-pv-giuliacastro
+      - name: project2-pv2-giuliacastro
         persistentVolumeClaim:
-          claimName: project2-pv-giuliacastro
+          claimName: project2-pv2-giuliacastro
           
