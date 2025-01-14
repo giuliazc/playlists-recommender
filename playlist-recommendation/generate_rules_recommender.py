@@ -5,9 +5,9 @@ from tqdm import tqdm
 from fpgrowth_py import fpgrowth
 from typing import List, Tuple, Set, Any
 
-DATA_PATH = "/home/giuliacastro/project2-pv/data"
+DATA_PATH = "/home/giuliacastro/project2-pv2/data"
 CSV_PATH = os.path.join(DATA_PATH, "2023_spotify_ds1.csv")
-RULES_PATH = "/home/giuliacastro/project2-pv/rules"
+RULES_PATH = "/home/giuliacastro/project2-pv2/rules"
 FREQUENT_ITEMSETS_PATH = os.path.join(RULES_PATH, "frequent_itemsets.pkl")
 RULES_PATH = os.path.join(RULES_PATH, "rules.pkl")
 
