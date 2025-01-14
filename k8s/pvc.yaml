@@ -12,6 +12,8 @@ spec:
   storageClassName: default-storage-class-giuliacastro
   accessModes:
     - ReadWriteMany
-persistentVolumeReclaimPolicy: Recycle
+  selector:
+    matchLabels:
+      namespace: giuliacastro
 hostPath:
   /home/giuliacastro/project2-pv2
