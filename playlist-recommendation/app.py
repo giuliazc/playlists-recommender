@@ -1,10 +1,12 @@
 import os
 import pickle
+from flask_cors import CORS
 from typing import List, Dict
 from collections import defaultdict
 from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
+CORS(app)
 
 PORT_API_REST = 52025
 RULES_PATH = "/home/giuliacastro/project2-pv2/rules"
