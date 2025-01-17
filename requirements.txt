@@ -1,5 +1,5 @@
 Flask==2.2.5
-Flask-Cors==3.0.10
+Flask-Cors==4.0.2
 fpgrowth-py==1.0.0
 pandas==2.2.3
 tqdm==4.65.0
