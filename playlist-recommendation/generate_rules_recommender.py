@@ -1,6 +1,5 @@
 import os
 import pickle
-import pandas as pd
 from tqdm import tqdm
 from fpgrowth_py import fpgrowth
 from typing import List, Tuple, Set, Any
