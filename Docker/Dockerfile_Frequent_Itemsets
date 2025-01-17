@@ -5,7 +5,7 @@ WORKDIR /app
 COPY requirements.txt /app
 
 COPY playlist-recommendation/app.py /app
-COPY playlist-recommendation/templates/index.html /app/templates
+COPY playlist-recommendation/templates/index.html /app/templates/
 
 RUN pip install --no-cache-dir -r requirements.txt
 
