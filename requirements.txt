@@ -1,4 +1,4 @@
-Flask==2.2.3
+Flask==2.2.5
 Flask-Cors==3.0.10
 fpgrowth-py==1.0.0
 pandas==2.2.3
