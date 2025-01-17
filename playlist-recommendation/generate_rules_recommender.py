@@ -1,14 +1,27 @@
 import os
 import pickle
+import pandas as pd
 from tqdm import tqdm
 from fpgrowth_py import fpgrowth
 from typing import List, Tuple, Set, Any
 
 DATA_PATH = "/home/giuliacastro/project2-pv2/data"
-CSV_PATH = os.path.join(DATA_PATH, "2023_spotify_ds1.csv")
+#CSV_PATH = os.path.join(DATA_PATH, "2023_spotify_ds1.csv")
 RULES_PATH = "/home/giuliacastro/project2-pv2/rules"
 FREQUENT_ITEMSETS_PATH = os.path.join(RULES_PATH, "frequent_itemsets.pkl")
 RULES_PATH = os.path.join(RULES_PATH, "rules.pkl")
+
+def get_latest_csv(data_path:str) -> str:
+    """
+    Fetch the latest CSV file from PersistentVolumeClaim.
+    Args:
+        data_path (str): Location to fetch the latest dataset.
+    """
+    files = [os.path.join(data_path, f) for f in os.listdir(data_path) if f.endswith('.csv')]
+    if not files:
+        raise FileNotFoundError("No datasets were found for association rule generation")
+    latest_file = max(files, key=os.path.getmtime)
+    return latest_file
 
 def recommend_artist_track(artist_track:str, rules:List[Tuple[Set[str], Set[str]]], rec_num:int=5) -> List[str]:
     """
@@ -54,8 +67,8 @@ def generate_transactions(df: pd.DataFrame) -> List[List[str]]:
 
 
 if __name__ == "__main__":
-
-    df_rec = pd.read_csv(CSV_PATH)
+    csv_path = get_latest_csv(DATA_PATH)
+    df_rec = pd.read_csv(csv_path)
     transactions = generate_transactions(df_rec)
 
     with tqdm(total=1, desc="FP-Growth Processing", dynamic_ncols=True) as pbar:
