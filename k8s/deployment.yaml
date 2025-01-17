@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: playlists-recommender-deployment
+  namespace: giuliacastro
   labels:
     app: playlists-recommender-giuliacastro
 spec:
@@ -16,7 +17,7 @@ spec:
     spec:
       containers:
       - name: playlists-recommender-giuliacastro
-        image: public.ecr.aws/u7i7l2e7/playlists-recommender-giuliacastro:v0.2
+        image: public.ecr.aws/u7i7l2e7/playlists-recommender-giuliacastro:v0.3
         ports:
         - containerPort: 52025
         imagePullPolicy: IfNotPresent
@@ -24,7 +25,7 @@ spec:
         - name: project2-pv-giuliacastro
           mountPath: /home/giuliacastro/project2-pv2
       - name: frequent-itemsets-giuliacastro
-        image: public.ecr.aws/u7i7l2e7/frequent-itemsets-giuliacastro:v0.2
+        image: public.ecr.aws/u7i7l2e7/frequent-itemsets-giuliacastro:v0.3
         volumeMounts:
         - name: project2-pv-giuliacastro
           mountPath: /home/giuliacastro/project2-pv2

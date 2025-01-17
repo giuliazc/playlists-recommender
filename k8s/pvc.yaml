@@ -9,11 +9,9 @@ spec:
   resources:
     requests:
       storage: 1Gi 
-  storageClassName: default-storage-class-giuliacastro
+  storageClassName: "default-storage-class-giuliacastro"
   accessModes:
     - ReadWriteMany
   selector:
     matchLabels:
       namespace: giuliacastro
-hostPath:
-  /home/giuliacastro/project2-pv2
